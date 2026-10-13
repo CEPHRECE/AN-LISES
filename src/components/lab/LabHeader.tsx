@@ -22,11 +22,18 @@ export const LabHeader: React.FC<LabHeaderProps> = ({ onOpenMobileMenu, onOpenCo
   const location = useLocation()
 
   // Determine current breadcrumb
-  const currentNavItem = LAB_NAVIGATION_ITEMS.find(
-    (item) =>
-      item.path === location.pathname ||
-      (item.path !== '/app' && location.pathname.startsWith(item.path)),
-  )
+  const isExamesRoute =
+    location.pathname.startsWith('/exames') || location.pathname.startsWith('/app/fila')
+  const isExamDetail =
+    location.pathname.startsWith('/exames/') || location.pathname.startsWith('/app/fila/')
+
+  const currentNavItem = isExamesRoute
+    ? LAB_NAVIGATION_ITEMS.find((item) => item.id === 'fila-exames')
+    : LAB_NAVIGATION_ITEMS.find(
+        (item) =>
+          item.path === location.pathname ||
+          (item.path !== '/app' && location.pathname.startsWith(item.path)),
+      )
 
   return (
     <header className="h-16 border-b border-[#E5EBEF] bg-white sticky top-0 z-30 px-4 sm:px-6 flex items-center justify-between select-none">
@@ -50,9 +57,21 @@ export const LabHeader: React.FC<LabHeaderProps> = ({ onOpenMobileMenu, onOpenCo
             <span>CPDHRCE</span>
           </Link>
           <ChevronRight className="w-3.5 h-3.5 text-[#CBD8E0]" />
-          <span className="text-[#172B36] font-semibold">
-            {currentNavItem ? currentNavItem.label : 'Central Laboratorial'}
-          </span>
+          {isExamDetail ? (
+            <>
+              <Link to="/exames" className="text-[#8A9BA8] hover:text-[#172B36] transition-colors">
+                Fila de Exames
+              </Link>
+              <ChevronRight className="w-3.5 h-3.5 text-[#CBD8E0]" />
+              <span className="text-[#172B36] font-semibold font-mono">
+                {location.pathname.split('/').pop()}
+              </span>
+            </>
+          ) : (
+            <span className="text-[#172B36] font-semibold">
+              {currentNavItem ? currentNavItem.label : 'Central Laboratorial'}
+            </span>
+          )}
         </nav>
       </div>
 

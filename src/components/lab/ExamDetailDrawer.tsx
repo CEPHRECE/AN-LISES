@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import {
   X,
   FileText,
@@ -10,6 +11,7 @@ import {
   Dna,
   ShieldAlert,
   ArrowRight,
+  ExternalLink,
 } from 'lucide-react'
 import { LabExamSample } from '@/data/labMockData'
 import { StatusBadge } from './StatusBadge'
@@ -20,6 +22,7 @@ interface ExamDetailDrawerProps {
 }
 
 export const ExamDetailDrawer: React.FC<ExamDetailDrawerProps> = ({ exam, onClose }) => {
+  const navigate = useNavigate()
   if (!exam) return null
 
   return (
@@ -160,11 +163,12 @@ export const ExamDetailDrawer: React.FC<ExamDetailDrawerProps> = ({ exam, onClos
         <button
           type="button"
           onClick={() => {
-            alert('Abertura de ficha de bancada em desenvolvimento para as próximas etapas.')
+            onClose()
+            navigate(`/exames/${exam.id}`)
           }}
           className="px-3.5 py-1.5 text-xs font-medium text-white bg-[#087F8C] hover:bg-[#066974] rounded-md transition-colors flex items-center gap-1.5 shadow-sm"
         >
-          <span>Abrir Rastreabilidade</span>
+          <span>Ver Detalhe Completo</span>
           <ArrowRight className="w-3.5 h-3.5" />
         </button>
       </div>

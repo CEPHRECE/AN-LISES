@@ -11,6 +11,7 @@ import Layout from './components/Layout'
 import LabGlobalLayout from './components/lab/LabGlobalLayout'
 import CentralLaboratorialHome from './pages/lab/CentralLaboratorialHome'
 import FilaExamesPage from './pages/lab/FilaExamesPage'
+import DetalheExamePage from './pages/lab/DetalheExamePage'
 import RastreabilidadePage from './pages/lab/RastreabilidadePage'
 import RetestesPage from './pages/lab/RetestesPage'
 import IndicadoresPage from './pages/lab/IndicadoresPage'
@@ -32,11 +33,18 @@ const App = () => (
         <Route path="/app" element={<LabGlobalLayout />}>
           <Route index element={<CentralLaboratorialHome />} />
           <Route path="fila" element={<FilaExamesPage />} />
+          <Route path="fila/:id" element={<DetalheExamePage />} />
           <Route path="rastreabilidade" element={<RastreabilidadePage />} />
           <Route path="retestes" element={<RetestesPage />} />
           <Route path="indicadores" element={<IndicadoresPage />} />
           <Route path="fontes" element={<FontesDadosPage />} />
           <Route path="configuracoes" element={<ConfiguracoesPage />} />
+        </Route>
+
+        {/* Rotas canônicas diretas solicitadas: /exames e /exames/:id */}
+        <Route element={<LabGlobalLayout />}>
+          <Route path="/exames" element={<FilaExamesPage />} />
+          <Route path="/exames/:id" element={<DetalheExamePage />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />

@@ -35,7 +35,7 @@ export const LAB_NAVIGATION_ITEMS: NavItem[] = [
   {
     id: 'fila-exames',
     label: 'Fila de Exames',
-    path: '/app/fila',
+    path: '/exames',
     icon: ListOrdered,
     badge: 48,
     badgeVariant: 'default',
@@ -131,14 +131,20 @@ export const LabSidebar: React.FC<LabSidebarProps> = ({ className, onCloseMobile
                 to={item.path}
                 end={item.path === '/app'}
                 onClick={onCloseMobile}
-                className={({ isActive }) =>
-                  cn(
+                className={({ isActive }) => {
+                  const isCurrent =
+                    isActive ||
+                    (item.id === 'fila-exames' &&
+                      (window.location.pathname.startsWith('/exames') ||
+                        window.location.pathname.startsWith('/app/fila')))
+
+                  return cn(
                     'group relative flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-all duration-150',
-                    isActive
+                    isCurrent
                       ? 'bg-[#1D455B] text-white shadow-sm'
                       : 'text-[#8BA2AF] hover:text-white hover:bg-[#163647]',
                   )
-                }
+                }}
               >
                 {({ isActive }) => (
                   <>

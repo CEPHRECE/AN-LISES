@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { AlertTriangle, Clock, ArrowRight, Sparkles, ExternalLink, RotateCcw } from 'lucide-react'
 import { LabExamSample } from '@/data/labMockData'
 import { StatusBadge } from './StatusBadge'
@@ -11,6 +12,7 @@ interface LabTableProps {
 }
 
 export const LabTable: React.FC<LabTableProps> = ({ exams, onSelectExam, selectedExamId }) => {
+  const navigate = useNavigate()
   const getPriorityBadge = (priority: LabExamSample['priority']) => {
     switch (priority) {
       case 'transplante_imediato':
@@ -105,7 +107,13 @@ export const LabTable: React.FC<LabTableProps> = ({ exams, onSelectExam, selecte
                 return (
                   <tr
                     key={exam.id}
-                    onClick={() => onSelectExam?.(exam)}
+                    onClick={() => {
+                      if (onSelectExam) {
+                        onSelectExam(exam)
+                      } else {
+                        navigate(`/exames/${exam.id}`)
+                      }
+                    }}
                     className={cn(
                       'transition-colors cursor-pointer group',
                       isSelected ? 'bg-[#F0F8FA]' : 'hover:bg-[#F8FAFB]',
@@ -195,9 +203,9 @@ export const LabTable: React.FC<LabTableProps> = ({ exams, onSelectExam, selecte
                         type="button"
                         onClick={(e) => {
                           e.stopPropagation()
-                          onSelectExam?.(exam)
+                          navigate(`/exames/${exam.id}`)
                         }}
-                        className="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-medium text-[#087F8C] hover:text-[#044C54] hover:bg-[#E6F4F6] rounded-md transition-colors"
+                        className="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-medium text-[#087F8C] hover:text-[#044C54] hover:bg-[#E6F4F6] rounded-md transition-colors font-semibold"
                       >
                         <span>Detalhar</span>
                         <ArrowRight className="w-3 h-3" />

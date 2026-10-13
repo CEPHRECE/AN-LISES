@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react'
+import { useNavigate } from 'react-router-dom'
 import {
   FileText,
   Clock,
@@ -16,6 +17,7 @@ import {
   Workflow,
   Search,
   CheckCircle,
+  ExternalLink,
 } from 'lucide-react'
 import {
   BarChart,
@@ -50,6 +52,8 @@ import {
 import { cn } from '@/lib/utils'
 
 export const CentralLaboratorialHome: React.FC = () => {
+  const navigate = useNavigate()
+
   // Estado de controle de período
   const [selectedPeriod, setSelectedPeriod] = useState<PeriodFilterOption>('7d')
 
@@ -663,17 +667,30 @@ export const CentralLaboratorialHome: React.FC = () => {
 
                         {/* Ação */}
                         <td className="py-3 px-4 text-right">
-                          <button
-                            type="button"
-                            onClick={(e) => {
-                              e.stopPropagation()
-                              setSelectedExam(exam)
-                            }}
-                            className="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-medium text-[#087F8C] hover:text-[#044C54] hover:bg-[#E6F4F6] rounded-md transition-colors"
-                          >
-                            <span>Detalhar</span>
-                            <ArrowRight className="w-3 h-3" />
-                          </button>
+                          <div className="flex items-center justify-end gap-1.5">
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                setSelectedExam(exam)
+                              }}
+                              className="px-2 py-1 text-[11px] font-medium text-[#596E79] hover:text-[#172B36] hover:bg-[#EEF3F6] rounded-md transition-colors"
+                              title="Visualização rápida em painel lateral"
+                            >
+                              Painel
+                            </button>
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                navigate(`/exames/${exam.id}`)
+                              }}
+                              className="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-medium text-[#087F8C] hover:text-[#044C54] hover:bg-[#E6F4F6] rounded-md transition-colors font-semibold"
+                            >
+                              <span>Detalhar</span>
+                              <ArrowRight className="w-3 h-3" />
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     )

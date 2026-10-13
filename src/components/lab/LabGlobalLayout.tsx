@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, Link } from 'react-router-dom'
 import { LabSidebar } from './LabSidebar'
 import { LabHeader } from './LabHeader'
 import {
@@ -92,15 +92,13 @@ export const LabGlobalLayout: React.FC = () => {
               </div>
             ) : (
               filteredCommandSamples.map((sample) => (
-                <button
+                <Link
                   key={sample.id}
-                  type="button"
-                  onClick={() => {
-                    setCommandPaletteOpen(false)
-                    // Navigate or alert
-                  }}
+                  to={`/exames/${sample.id}`}
+                  onClick={() => setCommandPaletteOpen(false)}
                   className="w-full text-left p-2.5 hover:bg-[#F8FAFB] rounded-lg transition-colors flex items-center justify-between group"
                 >
+                  {' '}
                   <div className="flex items-center gap-3">
                     <div className="p-1.5 rounded bg-[#E6F4F6] text-[#087F8C]">
                       <Dna className="w-4 h-4" />
@@ -119,13 +117,11 @@ export const LabGlobalLayout: React.FC = () => {
                       </p>
                     </div>
                   </div>
-
                   <ArrowRight className="w-3.5 h-3.5 text-[#CBD8E0] group-hover:text-[#087F8C] group-hover:translate-x-0.5 transition-all" />
-                </button>
+                </Link>
               ))
             )}
           </div>
-
           <div className="p-2.5 bg-[#F8FAFB] border-t border-[#E5EBEF] flex items-center justify-between text-[11px] text-[#8A9BA8]">
             <span>Pressione ESC para fechar</span>
             <span className="font-mono">Central Laboratorial CPDHRCE</span>
