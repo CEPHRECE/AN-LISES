@@ -67,8 +67,8 @@ export const MetricCard: React.FC<MetricCardProps> = ({
           {subtext && (
             <span
               className={cn(
-                'text-[#8A9BA8] truncate',
-                change ? 'text-[11px] text-right max-w-[65%]' : 'text-xs',
+                'text-[#8A9BA8]',
+                change ? 'text-[11px] text-right max-w-[65%] truncate' : 'text-xs leading-relaxed',
               )}
             >
               {subtext}
