@@ -350,6 +350,23 @@
   .link-expand-underline:hover::after {
     width: 100%;
   }
+
+  /* CPDHRCE Precision Micro-Interactions */
+  .lab-card-hover {
+    transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .lab-card-hover:hover {
+    border-color: #d2dde4;
+    box-shadow:
+      0 2px 8px -1px rgba(16, 42, 56, 0.05),
+      0 1px 3px -1px rgba(16, 42, 56, 0.03);
+  }
+
+  /* Subtle scientific grid pattern */
+  .bg-lab-grid {
+    background-image: radial-gradient(#cbd8e0 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
 }
 
 body {
@@ -360,6 +377,8 @@ body {
     'Segoe UI',
     Roboto,
     sans-serif;
-  color: #1b263b;
-  background-color: #f8fafc;
+  color: #172b36;
+  background-color: #f8fafb;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

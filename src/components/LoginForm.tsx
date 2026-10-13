@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import {
   Mail,
   Lock,
@@ -12,6 +13,7 @@ import {
   CheckCircle2,
   Info,
   Check,
+  FlaskConical,
 } from 'lucide-react'
 
 export const LoginForm: React.FC = () => {
@@ -49,6 +51,8 @@ export const LoginForm: React.FC = () => {
 
   const isFormValid = isEmailValid && isPasswordValid
 
+  const navigate = useNavigate()
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setTouchedEmail(true)
@@ -63,13 +67,11 @@ export const LoginForm: React.FC = () => {
 
     setIsSubmitting(true)
 
-    // Simulate login attempt then inform user about agent access integration
+    // Simula validação e redireciona para a Central Laboratorial CPDHRCE
     setTimeout(() => {
       setIsSubmitting(false)
-      setSubmitSuccess(
-        `Credenciais validadas com sucesso para ${email.trim()}. O módulo de inteligência e agente de análise HLA está em fase de conexão institucional.`,
-      )
-    }, 1200)
+      navigate('/app')
+    }, 900)
   }
 
   const handleForgotPassword = (e: React.MouseEvent) => {
@@ -284,7 +286,7 @@ export const LoginForm: React.FC = () => {
               {isSubmitting ? (
                 <>
                   <Loader2 className="w-4 h-4 animate-spin" />
-                  <span>Autenticando...</span>
+                  <span>Autenticando na Central...</span>
                 </>
               ) : (
                 <>
@@ -292,6 +294,19 @@ export const LoginForm: React.FC = () => {
                   <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
                 </>
               )}
+            </button>
+          </div>
+
+          {/* Direct Demonstration Link to CPDHRCE Central Laboratorial */}
+          <div className="pt-1 text-center animate-ceph-in" style={{ animationDelay: '550ms' }}>
+            <button
+              type="button"
+              onClick={() => navigate('/app')}
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-[#102A38] hover:text-[#087F8C] py-1.5 px-3 rounded-lg border border-slate-200 hover:border-[#087F8C]/40 bg-[#F8FAFB] transition-colors"
+            >
+              <FlaskConical className="w-3.5 h-3.5 text-[#087F8C]" />
+              <span>Acessar demonstração CPDHRCE | Central Laboratorial</span>
+              <ArrowRight className="w-3 h-3 text-slate-400" />
             </button>
           </div>
         </form>
