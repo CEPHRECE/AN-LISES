@@ -109,6 +109,9 @@ export const LabSidebar: React.FC<LabSidebarProps> = ({ className, onCloseMobile
               <span className="text-[11px] text-[#8BA2AF] truncate max-w-[150px]">
                 Central Laboratorial
               </span>
+              <span className="text-[10px] font-medium text-[#3AC0CE]/90 tracking-wide">
+                Ambiente demonstrativo
+              </span>
             </div>
           </div>
         </div>
@@ -191,7 +194,7 @@ export const LabSidebar: React.FC<LabSidebarProps> = ({ className, onCloseMobile
         <div className="px-3 py-2 rounded-lg bg-[#0C202B] border border-[#1E3E50]/80 flex items-center justify-between text-[11px]">
           <div className="flex items-center gap-2 text-[#8BA2AF]">
             <ShieldCheck className="w-3.5 h-3.5 text-[#3AC0CE]" />
-            <span>Ambiente B2B Seguro</span>
+            <span>Dados sintéticos — protótipo</span>
           </div>
           <span className="text-[10px] font-mono text-[#3AC0CE]">v1.0.0</span>
         </div>

@@ -1,16 +1,6 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import {
-  Search,
-  Bell,
-  ChevronRight,
-  Menu,
-  Command,
-  HelpCircle,
-  FlaskConical,
-  Activity,
-  Layers,
-} from 'lucide-react'
+import { Search, Bell, ChevronRight, Menu, Command, FlaskConical } from 'lucide-react'
 import { LAB_NAVIGATION_ITEMS } from './LabSidebar'
 
 interface LabHeaderProps {
@@ -90,10 +80,10 @@ export const LabHeader: React.FC<LabHeaderProps> = ({ onOpenMobileMenu, onOpenCo
           </kbd>
         </button>
 
-        {/* Status Indicator */}
-        <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#ECFDF5] border border-[#A7F3D0] text-[11px] font-medium text-[#065F46]">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
-          <span>Equipamentos Online</span>
+        {/* Demonstrative Environment Badge */}
+        <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#F1F5F9] border border-[#E2E8F0] text-[11px] font-medium text-[#475569]">
+          <FlaskConical className="w-3.5 h-3.5 text-[#087F8C]" />
+          <span>Ambiente demonstrativo</span>
         </div>
 
         {/* Notification Bell */}
@@ -118,7 +108,7 @@ export const LabHeader: React.FC<LabHeaderProps> = ({ onOpenMobileMenu, onOpenCo
           </div>
           <div className="hidden xl:block text-left">
             <p className="text-xs font-medium text-[#172B36] leading-tight">Dra. Raquel M.</p>
-            <p className="text-[10px] text-[#8A9BA8] leading-tight">Biomédica HLA</p>
+            <p className="text-[10px] text-[#8A9BA8] leading-tight">Usuária demonstrativa</p>
           </div>
         </div>
       </div>

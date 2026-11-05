@@ -145,8 +145,8 @@ export const ExamDetailDrawer: React.FC<ExamDetailDrawerProps> = ({ exam, onClos
             <span>Rastreabilidade & Conformidade</span>
           </div>
           <p className="leading-relaxed text-[#64748B]">
-            Registros de temperatura, lotes de reagentes e corrida de PCR são vinculados diretamente
-            a este ID de protocolo para auditoria ISO 15189 / CAP.
+            Registros demonstrativos de temperatura, lotes de reagentes e etapas analíticas são
+            vinculados a este ID de protocolo apenas para fins de protótipo.
           </p>
         </div>
       </div>
