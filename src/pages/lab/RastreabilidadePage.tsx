@@ -16,10 +16,10 @@ export const RastreabilidadePage: React.FC = () => {
     <div className="space-y-6 animate-fade-in">
       <PageHeader
         title="Rastreabilidade de Bancada"
-        description="Rastreamento ponto a ponto de cada lote, tubo, corrida de PCR e arquivos FASTQ/VCF gerados nos sequenciadores do CEPH/RECE."
+        description="Registro demonstrativo de rastreamento ponto a ponto de lotes, tubos e etapas de acompanhamento — sem afirmação de cadeia de custódia validada ou calibração verificada."
         badge={
-          <StatusBadge variant="success" size="sm">
-            Cadeia de Custódia Válida
+          <StatusBadge variant="neutral" size="sm">
+            Registro de Custódia Demonstrativo
           </StatusBadge>
         }
       />
@@ -27,7 +27,7 @@ export const RastreabilidadePage: React.FC = () => {
       {/* Timeline view of stages */}
       <div className="space-y-4">
         <h2 className="text-xs font-semibold uppercase tracking-wider text-[#596E79]">
-          Linha do Tempo dos Processos Laboratoriais
+          Linha do Tempo dos Processos Laboratoriais (dados demonstrativos)
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -39,7 +39,8 @@ export const RastreabilidadePage: React.FC = () => {
                     Etapa 0{idx + 1}
                   </span>
                   <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#F1F5F9] text-[#475569]">
-                    {step.activeCount} na bancada
+                    {MOCK_EXAM_SAMPLES.filter((exam) => exam.currentStep === step.step).length} na
+                    bancada
                   </span>
                 </div>
                 <h3 className="text-sm font-semibold text-[#172B36]">{step.label}</h3>
@@ -49,11 +50,11 @@ export const RastreabilidadePage: React.FC = () => {
               <div className="mt-4 pt-3 border-t border-[#EEF3F6] flex items-center justify-between text-xs text-[#8A9BA8] font-mono">
                 <span className="flex items-center gap-1">
                   <Clock className="w-3.5 h-3.5 text-[#596E79]" />
-                  <span>Média: {step.averageTime}</span>
+                  <span>Tempo demonstrativo: {step.averageTime}</span>
                 </span>
-                <span className="text-[#059669] flex items-center gap-1">
-                  <CheckCircle2 className="w-3.5 h-3.5" />
-                  <span>100% calibrado</span>
+                <span className="text-[#8A9BA8] flex items-center gap-1">
+                  <AlertTriangle className="w-3.5 h-3.5" />
+                  <span>Calibração: não verificado neste protótipo</span>
                 </span>
               </div>
             </LabCard>
@@ -66,11 +67,12 @@ export const RastreabilidadePage: React.FC = () => {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1">
             <h3 className="text-sm font-semibold text-[#172B36]">
-              Registro Automatizado de Logs de Equipamento
+              Registro Demonstrativo de Logs de Equipamento
             </h3>
             <p className="text-xs text-[#596E79]">
-              Conexão com os termocicladores Applied Biosystems e sequenciadores Illumina MiSeq
-              garantem carimbo de data/hora para auditoria do transplante.
+              Registros de carimbo de data/hora das etapas são gerados com dados simulados. A
+              conexão com equipamentos reais do laboratório ainda não está configurada neste
+              protótipo.
             </p>
           </div>
           <button

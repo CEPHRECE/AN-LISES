@@ -77,7 +77,7 @@ export const LoginForm: React.FC = () => {
   const handleForgotPassword = (e: React.MouseEvent) => {
     e.preventDefault()
     setInfoModal(
-      'Para redefinição de acesso ao sistema do Laboratório de HLA, entre em contato com o suporte de TI do CEPH/RECE pelo e-mail administracao@cpdhrce.com ou ramal (85) 2010-0028.',
+      'Este é um protótipo demonstrativo: a autenticação não está validada e nenhum contato oficial de suporte está disponível nesta versão.',
     )
   }
 
@@ -92,14 +92,17 @@ export const LoginForm: React.FC = () => {
         <header className="mb-8 animate-ceph-in" style={{ animationDelay: '100ms' }}>
           <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-[#1BA6A6]/10 text-[#158383] text-xs font-semibold uppercase tracking-wider mb-3">
             <span className="w-2 h-2 rounded-full bg-[#1BA6A6]" />
-            Ambiente Seguro
+            Acesso Demonstrativo
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1B263B] tracking-tight">
-            Acessar Sistema
+            Acessar Sistema (Demonstração)
           </h2>
           <p className="mt-2 text-sm text-[#4A5568] leading-relaxed">
             Sistema de Análise de Exames Laboratoriais —{' '}
             <span className="font-semibold text-[#158383]">Laboratório de HLA</span>
+            <span className="block mt-1 text-xs text-[#8A9BA8]">
+              Protótipo demonstrativo: autenticação e conformidade não validadas.
+            </span>
           </p>
         </header>
 
@@ -125,7 +128,7 @@ export const LoginForm: React.FC = () => {
           >
             <CheckCircle2 className="w-5 h-5 text-[#1BA6A6] shrink-0 mt-0.5" />
             <div className="flex-1 text-xs sm:text-sm">
-              <p className="font-bold text-[#0E7A7A]">Acesso validado</p>
+              <p className="font-bold text-[#0E7A7A]">Acesso demonstrativo</p>
               <p className="text-slate-700 mt-1 leading-relaxed">{submitSuccess}</p>
             </div>
           </div>
@@ -317,7 +320,9 @@ export const LoginForm: React.FC = () => {
           style={{ animationDelay: '600ms' }}
         >
           <Shield className="w-4 h-4 text-[#1BA6A6] shrink-0" />
-          <span>Acesso restrito a profissionais autorizados</span>
+          <span>
+            Acesso demonstrativo — autenticação e conformidade não validadas neste protótipo
+          </span>
         </div>
       </div>
 

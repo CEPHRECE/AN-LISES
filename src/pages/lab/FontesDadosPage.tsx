@@ -8,60 +8,60 @@ import {
   LabCardDescription,
   LabCardContent,
 } from '@/components/lab/LabCard'
-import { Database, Server, RefreshCw, CheckCircle2, Cpu, HardDrive } from 'lucide-react'
+import { RefreshCw, FileQuestion, Info } from 'lucide-react'
 
 export const FontesDadosPage: React.FC = () => {
   const sources = [
     {
-      name: 'Sequenciador MiSeq #01 (Illumina)',
+      name: 'Equipamento analítico do laboratório',
       type: 'Equipamento Analítico',
-      status: 'Conectado',
-      detail: 'Upload automático de FASTQ via rede local segura',
-      syncTime: 'Há 12 min',
+      status: 'Não configurada',
+      detail: 'Categoria de integração aguardando definição de metodologias e documentação',
+      syncTime: 'Aguardando configuração',
     },
     {
-      name: 'Luminex 200 (xMAP Technology)',
-      type: 'Analisador de Esferas',
-      status: 'Conectado',
-      detail: 'Leitura direta de MFI de painéis de anticorpos anti-HLA',
-      syncTime: 'Há 5 min',
+      name: 'Analisador de ensaios laboratoriais',
+      type: 'Analisador de Bancada',
+      status: 'Não configurada',
+      detail: 'Categoria de integração aguardando documentação do fornecimento',
+      syncTime: 'Aguardando configuração',
     },
     {
-      name: 'Base IMGT/HLA Database (IPD-IMGT)',
-      type: 'Referência Genômica Externa',
-      status: 'Atualizado (Release 3.58.0)',
-      detail: 'Tabelas alélicas oficiais para conferência de polimorfismo',
-      syncTime: 'Ontem às 22:00',
+      name: 'Base de referência externa',
+      type: 'Referência Externa',
+      status: 'Aguardando documentação',
+      detail: 'Categoria de base de referência aguardando documentação de acesso e versão',
+      syncTime: 'Aguardando configuração',
     },
     {
-      name: 'LIS Central CEPH/RECE',
-      type: 'Sistema Laboratorial Legado',
-      status: 'Sincronizado',
-      detail: 'Intercâmbio de cadastros e triagem inicial de tubos',
-      syncTime: 'Tempo Real',
+      name: 'Sistema laboratorial institucional',
+      type: 'Sistema Legado',
+      status: 'Aguardando documentação',
+      detail: 'Categoria de intercâmbio institucional aguardando documentação de integração',
+      syncTime: 'Aguardando configuração',
     },
   ]
 
   return (
     <div className="space-y-6 animate-fade-in">
       <PageHeader
-        title="Fontes de Dados & Integrações Analíticas"
-        description="Monitoramento da comunicação entre equipamentos de bancada, sequenciadores, base genômica IMGT/HLA e barramento de dados."
+        title="Fontes de Dados & Integrações"
+        description="Categorias de integração previstas para o protótipo. Nenhuma fonte está configurada — os nomes de equipamentos e bases são genéricos até documentação oficial."
         badge={
-          <StatusBadge variant="success" size="sm">
-            4 Fontes Conectadas
+          <StatusBadge variant="neutral" size="sm">
+            0 Fontes Configuradas
           </StatusBadge>
         }
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {sources.map((src) => (
-          <LabCard key={src.name} className="flex flex-col justify-between">
+          <LabCard key={src.name} className="flex flex-col justify-between opacity-80">
             <div>
               <div className="flex items-center justify-between mb-2">
                 <span className="text-[11px] font-mono text-[#8A9BA8] uppercase">{src.type}</span>
-                <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[#059669]">
-                  <CheckCircle2 className="w-3 h-3" />
+                <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[#8A9BA8]">
+                  <FileQuestion className="w-3 h-3" />
                   <span>{src.status}</span>
                 </span>
               </div>
@@ -70,10 +70,11 @@ export const FontesDadosPage: React.FC = () => {
             </div>
 
             <div className="mt-4 pt-3 border-t border-[#EEF3F6] flex items-center justify-between text-xs text-[#8A9BA8] font-mono">
-              <span>Sincronização: {src.syncTime}</span>
+              <span>{src.syncTime}</span>
               <button
                 type="button"
-                className="text-[#087F8C] hover:text-[#066974] flex items-center gap-1 font-sans text-xs font-medium"
+                disabled
+                className="text-[#8A9BA8] flex items-center gap-1 font-sans text-xs font-medium cursor-not-allowed"
               >
                 <RefreshCw className="w-3 h-3" />
                 <span>Testar Link</span>
@@ -81,6 +82,15 @@ export const FontesDadosPage: React.FC = () => {
             </div>
           </LabCard>
         ))}
+      </div>
+
+      <div className="p-4 rounded-xl bg-[#F8FAFB] border border-[#E5EBEF] flex items-start gap-3">
+        <Info className="w-4 h-4 text-[#8A9BA8] shrink-0 mt-0.5" />
+        <p className="text-[11px] text-[#596E79] leading-relaxed">
+          Nota: nenhum equipamento, base externa ou sistema está conectado neste protótipo. Todas as
+          fontes listadas são categorias genéricas aguardando definição das metodologias e
+          documentação de integração — os ícones e nomes não identificam equipamentos reais.
+        </p>
       </div>
     </div>
   )

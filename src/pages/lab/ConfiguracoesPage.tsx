@@ -15,7 +15,7 @@ export const ConfiguracoesPage: React.FC = () => {
     <div className="space-y-6 animate-fade-in">
       <PageHeader
         title="Configurações da Central Laboratorial"
-        description="Parâmetros do sistema, regras de alerta de reteste, critérios de corte de qualidade (Q-score > 30) e preferências do ambiente."
+        description="Preferências do ambiente demonstrativo. Os parâmetros analíticos exibidos são ilustrativos e aguardam definição oficial das metodologias."
         badge={
           <StatusBadge variant="neutral" size="sm">
             Ambiente Institucional
@@ -31,9 +31,9 @@ export const ConfiguracoesPage: React.FC = () => {
                 <Sliders className="w-4 h-4" />
               </div>
               <div>
-                <LabCardTitle>Critérios Analíticos de Reteste</LabCardTitle>
+                <LabCardTitle>Parâmetros Analíticos Demonstrativos</LabCardTitle>
                 <LabCardDescription>
-                  Thresholds automatizados para solicitação de repetição
+                  Valores ilustrativos — nenhum critério automático de repetição está em vigor
                 </LabCardDescription>
               </div>
             </div>
@@ -42,23 +42,29 @@ export const ConfiguracoesPage: React.FC = () => {
             <div className="space-y-3 pt-2 text-xs text-[#596E79]">
               <div className="flex items-center justify-between p-2.5 rounded-lg bg-[#F8FAFB] border border-[#E5EBEF]">
                 <div>
-                  <p className="font-medium text-[#172B36]">Profundidade Mínima de Leitura (NGS)</p>
+                  <p className="font-medium text-[#172B36]">
+                    Parâmetro analítico — aguardando definição das metodologias
+                  </p>
                   <p className="text-[11px] text-[#8A9BA8]">
-                    Cobertura mínima por éxon crítico (2 e 3)
+                    Valor demonstrativo, sem metodologia associada
                   </p>
                 </div>
-                <span className="font-mono font-semibold text-[#172B36]">≥ 50x</span>
+                <span className="font-mono font-semibold text-[#8A9BA8]">A definir</span>
               </div>
 
               <div className="flex items-center justify-between p-2.5 rounded-lg bg-[#F8FAFB] border border-[#E5EBEF]">
                 <div>
-                  <p className="font-medium text-[#172B36]">
-                    Pureza de DNA Extraído (Razão 260/280)
+                  <p className="font-medium text-[#172B36]">Pureza de amostra (demonstrativo)</p>
+                  <p className="text-[11px] text-[#8A9BA8]">
+                    Valor ilustrativo — critério real aguardando definição
                   </p>
-                  <p className="text-[11px] text-[#8A9BA8]">Faixa ideal para amplificação PCR</p>
                 </div>
-                <span className="font-mono font-semibold text-[#172B36]">1.7 – 1.9</span>
+                <span className="font-mono font-semibold text-[#8A9BA8]">1.7 – 1.9*</span>
               </div>
+              <p className="text-[11px] text-[#8A9BA8] leading-relaxed">
+                * Valores meramente ilustrativos deste protótipo. Nenhum parâmetro nesta tela
+                configura ou aciona critérios reais de repetição de exames.
+              </p>
             </div>
           </LabCardContent>
         </LabCard>

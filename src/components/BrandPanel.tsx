@@ -112,9 +112,9 @@ export const BrandPanel: React.FC = () => {
               <Activity className="w-4 h-4" />
             </div>
             <div>
-              <p className="text-xs font-semibold text-white">+12.000 Exames/Ano</p>
+              <p className="text-xs font-semibold text-white">Acompanhamento Demonstrativo</p>
               <p className="text-[11px] text-slate-400 leading-tight mt-0.5">
-                Agilidade e rastreabilidade na emissão de laudos
+                Protótipo: encerramento do acompanhamento não significa laudo emitido
               </p>
             </div>
           </div>

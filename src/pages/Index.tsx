@@ -31,6 +31,9 @@ const Index: React.FC = () => {
         <p className="mt-2.5 text-[11px] text-slate-300 leading-snug">
           Centro de Pesquisas em Doenças Hepato Renais do Ceará — CEPH/RECE
         </p>
+        <p className="mt-1 text-[10px] font-semibold uppercase tracking-wide text-[#4EE0E0]">
+          Acesso demonstrativo — autenticação não validada neste protótipo
+        </p>
       </header>
 
       {/*

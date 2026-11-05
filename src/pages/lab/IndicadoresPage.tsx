@@ -9,18 +9,40 @@ import {
   LabCardDescription,
   LabCardContent,
 } from '@/components/lab/LabCard'
-import { MOCK_METRICS } from '@/data/labMockData'
-import { BarChart3, TrendingUp, Clock, CheckCircle2, Award } from 'lucide-react'
+import { MOCK_METRICS, MOCK_EXAM_SAMPLES, LAB_FLOW_STEPS } from '@/data/labMockData'
+import { Info } from 'lucide-react'
 
 export const IndicadoresPage: React.FC = () => {
+  // Métricas 100% derivadas dos dados demonstrativos carregados (nenhum valor absoluto externo)
+  const totalSamples = MOCK_EXAM_SAMPLES.length
+  const countByMethodology = (methodology: string) =>
+    MOCK_EXAM_SAMPLES.filter((exam) => exam.methodology === methodology).length
+  const countBySituation = (situation: string) =>
+    MOCK_EXAM_SAMPLES.filter((exam) => exam.situation === situation).length
+  const closedCount = countBySituation('concluido')
+  const inProgressCount = totalSamples - closedCount
+
+  const methodologyDistribution = ['Metodologia A', 'Metodologia B', 'Metodologia C'].map(
+    (methodology) => ({
+      methodology,
+      count: countByMethodology(methodology),
+      pct: Math.round((countByMethodology(methodology) / totalSamples) * 100),
+    }),
+  )
+
+  const journeyDistribution = LAB_FLOW_STEPS.map((step) => ({
+    label: step.label,
+    count: MOCK_EXAM_SAMPLES.filter((exam) => exam.currentStep === step.step).length,
+  }))
+
   return (
     <div className="space-y-6 animate-fade-in">
       <PageHeader
-        title="Indicadores de Eficiência Analítica"
-        description="Métricas operacionais de tempo de resposta (Turnaround Time - TAT), índice de concordância alélica e produtividade de bancada."
+        title="Indicadores Demonstrativos"
+        description="Contagens e distribuições derivadas exclusivamente dos dados demonstrativos carregados neste protótipo. Não afirmam conformidade, calibração, desempenho clínico ou economia."
         badge={
-          <StatusBadge variant="success" size="sm">
-            Meta Operacional Atingida (99.1%)
+          <StatusBadge variant="neutral" size="sm">
+            Dados Demonstrativos
           </StatusBadge>
         }
       />
@@ -43,44 +65,35 @@ export const IndicadoresPage: React.FC = () => {
         <LabCard>
           <LabCardHeader>
             <div>
-              <LabCardTitle>Distribuição do TAT por Metodologia</LabCardTitle>
+              <LabCardTitle>Distribuição por Metodologia (dados carregados)</LabCardTitle>
               <LabCardDescription>
-                Tempo médio de liberação desde o recebimento do tubo
+                Contagem de amostras demonstrativas por metodologia rotulada
               </LabCardDescription>
             </div>
-            <span className="text-xs font-mono text-[#087F8C]">Média Geral: 42.4h</span>
+            <span className="text-xs font-mono text-[#087F8C]">Total: {totalSamples} amostras</span>
           </LabCardHeader>
           <LabCardContent>
             <div className="space-y-4 pt-2">
-              <div>
-                <div className="flex items-center justify-between text-xs text-[#172B36] font-medium mb-1">
-                  <span>SSP Baixa Resolução (Urgências)</span>
-                  <span className="font-mono">4.2 horas</span>
+              {methodologyDistribution.map((item) => (
+                <div key={item.methodology}>
+                  <div className="flex items-center justify-between text-xs text-[#172B36] font-medium mb-1">
+                    <span>{item.methodology}</span>
+                    <span className="font-mono">
+                      {item.count} amostras ({item.pct}%)
+                    </span>
+                  </div>
+                  <div className="h-2 w-full bg-[#E5EBEF] rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-[#087F8C] rounded-full"
+                      style={{ width: `${item.pct}%` }}
+                    />
+                  </div>
                 </div>
-                <div className="h-2 w-full bg-[#E5EBEF] rounded-full overflow-hidden">
-                  <div className="h-full bg-[#059669] rounded-full" style={{ width: '15%' }} />
-                </div>
-              </div>
-
-              <div>
-                <div className="flex items-center justify-between text-xs text-[#172B36] font-medium mb-1">
-                  <span>SSO Luminex (Painéis Médios)</span>
-                  <span className="font-mono">22.8 horas</span>
-                </div>
-                <div className="h-2 w-full bg-[#E5EBEF] rounded-full overflow-hidden">
-                  <div className="h-full bg-[#087F8C] rounded-full" style={{ width: '48%' }} />
-                </div>
-              </div>
-
-              <div>
-                <div className="flex items-center justify-between text-xs text-[#172B36] font-medium mb-1">
-                  <span>NGS Alta Resolução (Painel Completo 11 Loci)</span>
-                  <span className="font-mono">46.5 horas</span>
-                </div>
-                <div className="h-2 w-full bg-[#E5EBEF] rounded-full overflow-hidden">
-                  <div className="h-full bg-[#102A38] rounded-full" style={{ width: '85%' }} />
-                </div>
-              </div>
+              ))}
+              <p className="text-[11px] text-[#8A9BA8] leading-relaxed pt-1">
+                Os rótulos Metodologia A, B e C são provisórios — as metodologias reais ainda não
+                foram definidas para este protótipo.
+              </p>
             </div>
           </LabCardContent>
         </LabCard>
@@ -88,30 +101,44 @@ export const IndicadoresPage: React.FC = () => {
         <LabCard>
           <LabCardHeader>
             <div>
-              <LabCardTitle>Conformidade em Ensaios de Proficiência</LabCardTitle>
+              <LabCardTitle>Distribuição por Etapa da Jornada (dados carregados)</LabCardTitle>
               <LabCardDescription>
-                Desempenho no programa internacional UCLA e CAP
+                Quantidade de amostras demonstrativas em cada etapa operacional
               </LabCardDescription>
             </div>
-            <Award className="w-4 h-4 text-[#087F8C]" />
+            <Info className="w-4 h-4 text-[#087F8C]" />
           </LabCardHeader>
           <LabCardContent>
             <div className="p-4 rounded-xl bg-[#F8FAFB] border border-[#E5EBEF] space-y-3">
-              <div className="flex items-center justify-between">
+              {journeyDistribution.map((item) => (
+                <div key={item.label} className="flex items-center justify-between">
+                  <span className="text-xs font-semibold text-[#172B36]">{item.label}</span>
+                  <span className="font-mono font-bold text-xs text-[#087F8C]">{item.count}</span>
+                </div>
+              ))}
+              <div className="pt-2 border-t border-[#E5EBEF] flex items-center justify-between">
                 <span className="text-xs font-semibold text-[#172B36]">
-                  Concordância Alélica UCLA 2024/2025
+                  Acompanhamentos encerrados
                 </span>
-                <span className="font-mono font-bold text-xs text-[#059669]">100%</span>
+                <span className="font-mono font-bold text-xs text-[#172B36]">{closedCount}</span>
               </div>
-              <p className="text-xs text-[#596E79] leading-relaxed">
-                Todas as 24 amostras cegas enviadas pelo comitê internacional de
-                histocompatibilidade foram tipadas com concordância absoluta em primeiro e segundo
-                campos de resolução.
-              </p>
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-semibold text-[#172B36]">Em acompanhamento</span>
+                <span className="font-mono font-bold text-xs text-[#172B36]">
+                  {inProgressCount}
+                </span>
+              </div>
             </div>
           </LabCardContent>
         </LabCard>
       </div>
+
+      <p className="text-[11px] text-[#8A9BA8] leading-relaxed border-t border-[#E5EBEF] pt-4">
+        Nota: todos os indicadores desta página são demonstrativos, derivados dos dados simulados
+        carregados no protótipo. Não representam métricas reais do laboratório, não afirmam
+        conformidade, calibração, desempenho clínico ou economia, e não caracterizam emissão de
+        laudo.
+      </p>
     </div>
   )
 }
